@@ -357,7 +357,7 @@ $list = array (
     'group' => '102',
   ),
 );
- 
+ //расчитываем среднее количество студентов
  $countStudent=0;
  $countGroup=0;
  $avg=0;
@@ -370,6 +370,7 @@ $list = array (
   $avg=$countStudent/$countGroup;
   echo $avg;
  
+ //определяем количество учеников в каждой группе
  $studentsCount=[];
  Foreach ($list as $student) {
 	 $group=$student['group'];
@@ -381,6 +382,8 @@ $list = array (
 	 };
  };
  arsort($studentsCount);
+ 
+ //подсвечиваем цветом группы, где учеников больше среднего
  Foreach ($studentsCount as $group=>$count){
 	if ($count>$avg){
 	echo "<p class='large_group'>"."В группе ".$group . ": " . $count. " студентов"."</p>"; 
