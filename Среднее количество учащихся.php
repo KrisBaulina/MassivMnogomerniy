@@ -1,3 +1,8 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="style.css">	
+  </head>
+  <body>
 <?php
 
 $list = array (
@@ -352,15 +357,41 @@ $list = array (
     'group' => '102',
   ),
 );
-
-$result=0;
+ 
+ $countStudent=0;
+ $countGroup=0;
+ $avg=0;
  $group=[];
- Foreach ($list as $field => $value) {
-	 $group[]=$value['group'];
+ Foreach ($list as $students) {
+	 $student[]=$students['group'];
  };
-  $result=array_unique($group);
-  sort($result);
-  echo implode (', ',$result);
-  
+  $countStudent=Count($student);
+  $countGroup=count(array_unique($student));
+  $avg=$countStudent/$countGroup;
+  echo $avg;
+ 
+ $studentsCount=[];
+ Foreach ($list as $student) {
+	 $group=$student['group'];
+	 if (isset ($studentsCount[$group])){
+		 $studentsCount[$group]++;
+	 }
+	 else {
+		$studentsCount[$group]=1; 
+	 };
+ };
+ arsort($studentsCount);
+ Foreach ($studentsCount as $group=>$count){
+	if ($count>$avg){
+	echo "<p class='large_group'>"."В группе ".$group . ": " . $count. " студентов"."</p>"; 
+	}
+	else {
+		echo "<p>"."В группе ".$group . ": " . $count. " студентов"."</p>"; 
+	};
+ };
  
 ?>
+  </body>
+  </html>
+
+
